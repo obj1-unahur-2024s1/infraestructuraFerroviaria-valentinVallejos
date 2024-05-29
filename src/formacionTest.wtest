@@ -1,0 +1,279 @@
+import vagonesYLocomotoras.*
+import formaciones.*
+test "cantidad maxima  de pasajeros" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.that(f1.catMaxDePasajeros() == 165)
+
+}
+
+test "cantidad de vagones populares" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.that(f1.cantVagonesPopulares() == 1)
+
+}
+
+test " no es una formacion carguera" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.notThat(f1.esFormacionCarguera())
+
+}
+
+test "dispercion de peso" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.that(f1.dispercionDePeso() == 4220)
+
+}
+
+test "cant de baños en la formacion" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.that(f1.cantDeBanos() == 2)
+
+}
+
+test "canttidad de baños en la formacion 1" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	f1.hacerMantenimiento()
+	
+	assert.that(f1.catMaxDePasajeros() == 180)
+	assert.that(f1.cantVagonesPopulares() == 2)
+	assert.notThat(f1.esFormacionCarguera())
+	assert.that(f1.dispercionDePeso() == 3200)
+	assert.that(f1.cantDeBanos() == 2)
+	
+
+}
+
+test "canttidad de baños en la formacion 2" {
+	const f2 = new Formacion()
+	const vc = new VagonDeCarga(cargaMaxIdeal = 8000 , cantDeMaderasSueltas = 1)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 15 ,cantDeCamasPoeCompartimietos= 4)
+	
+
+	f2.acoplarVagon(vc)
+	f2.acoplarVagon(vd)
+	
+	assert.that(f2.catMaxDePasajeros() == 60)
+	assert.that(f2.cantVagonesPopulares() == 1)
+	assert.that(f2.esFormacionCarguera())
+	assert.that(f2.dispercionDePeso() == 900)
+	assert.that(f2.cantDeBanos() == 1)
+	
+	f2.hacerMantenimiento()
+	
+	assert.that(f2.catMaxDePasajeros() == 60)
+	assert.that(f2.cantVagonesPopulares() == 1)
+	assert.that(f2.esFormacionCarguera())
+	assert.that(f2.dispercionDePeso() == 500)
+	assert.that(f2.cantDeBanos() == 1)
+	
+
+}
+
+test "peso maximo sin locomotras" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	
+	assert.that(f1.pesoMax() == 29800)
+
+}
+
+test "la formacion es eficiente" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+	const l2 = new Locomotora(peso=5000 , maxPesoDeArrastre = 22000 , velocidadMax = 200)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	f1.acoplarLocomotora(l1)
+	
+	assert.that(f1.esEficiente())
+	
+	f1.acoplarLocomotora(l2)
+	assert.notThat(f1.esEficiente())
+}
+
+test "la formacion puede moverse" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+	const l2 = new Locomotora(peso=5000 , maxPesoDeArrastre = 22000 , velocidadMax = 200)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	f1.acoplarLocomotora(l1)
+	
+	assert.notThat(f1.puedeMoverse())
+	
+	f1.acoplarLocomotora(l2)
+	assert.that(f1.puedeMoverse())
+}
+
+test "cantidad de empuje faltante" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+	const l2 = new Locomotora(peso=5000 , maxPesoDeArrastre = 22000 , velocidadMax = 200)
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	f1.acoplarLocomotora(l1)
+	
+	assert.that(f1.cuantoEmpujeLeFalta() == 12800)
+	
+	f1.acoplarLocomotora(l2)
+	assert.that(f1.cuantoEmpujeLeFalta() == 0)
+}
+
+test "es Formacion equilibrada" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	f1.acoplarLocomotora(l1)
+	
+	assert.notThat(f1.estaEquilibrada())
+}
+
+test "la formacion no esta organizada" {
+	const f1 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vc)
+	f1.acoplarVagon(vd)
+	f1.acoplarLocomotora(l1)
+	
+	assert.notThat(f1.estaOrganizada())
+}
+
+test "la formacion esta organizada" {
+	const f1 = new Formacion()
+	const f2 = new Formacion()
+	const f3 = new Formacion()
+	const vp1 = new VagonDePasajeros(largo =10 , ancho = 4, tieneBanos = true, estaOrdenado = true )
+	const vp2 = new VagonDePasajeros(largo =7 , ancho = 2, tieneBanos = false, estaOrdenado = false)
+	const vc = new VagonDeCarga(cargaMaxIdeal = 6800 , cantDeMaderasSueltas = 5)
+	const vd = new VagonDormitorio(cantDeCompratimietos = 8 ,cantDeCamasPoeCompartimietos= 3)
+	const l1 = new Locomotora(peso=3000 , maxPesoDeArrastre = 20000 , velocidadMax = 180)
+
+	
+	f1.acoplarVagon(vp1)
+	f1.acoplarVagon(vp2)
+	f1.acoplarVagon(vd)
+	f1.acoplarVagon(vc)
+	f1.acoplarLocomotora(l1)
+	
+	assert.that(f1.estaOrganizada())
+	
+	f2.acoplarVagon(vc)
+	
+	assert.that(f2.estaOrganizada())
+	
+	f3.acoplarVagon(vp1)
+	
+	assert.that(f3.estaOrganizada())
+}
+
+
+
+
+
+
